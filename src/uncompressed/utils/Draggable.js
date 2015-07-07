@@ -8,7 +8,7 @@
  * @license Copyright (c) 2008-2015, GreenSock. All rights reserved.
  * This work is subject to the terms at http://greensock.com/standard-license or for
  * Club GreenSock members, the software agreement that was issued with your membership.
- * 
+ *
  * @author: Jack Doyle, jack@greensock.com
  */
 var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
@@ -1108,6 +1108,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 				this.dragResistance = parseFloat(vars.dragResistance) || 0;
 				this.edgeResistance = isNaN(vars.edgeResistance) ? 1 : parseFloat(vars.edgeResistance) || 0;
 				this.lockAxis = vars.lockAxis;
+				this.noPlaceholder = vars.noPlaceholder;
 				this.autoScroll = vars.autoScroll || 0;
 				this.lockedAxis = null;
 				this.allowEventDefault = !!vars.allowEventDefault;
@@ -1518,7 +1519,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 						if (allowNativeTouchScrolling || self.autoScroll) {
 							_recordMaxScrolls(target.parentNode);
 						}
-						if (self.autoScroll && !rotationMode && !scrollProxy && target.parentNode && !target.getBBox && target.parentNode._gsMaxScrollX && !_placeholderDiv.parentNode) {//add a placeholder div to prevent the parent container from collapsing when the user drags the element left.
+						if (!self.noPlaceholder && self.autoScroll && !rotationMode && !scrollProxy && target.parentNode && !target.getBBox && target.parentNode._gsMaxScrollX && !_placeholderDiv.parentNode) {//add a placeholder div to prevent the parent container from collapsing when the user drags the element left.
 							_placeholderDiv.style.width = (target.parentNode.scrollWidth) + "px";
 							target.parentNode.appendChild(_placeholderDiv);
 						}
